@@ -12,7 +12,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django import forms
-from .models import Notas
+from .models import Nota
 
 
 # Create your views here.
