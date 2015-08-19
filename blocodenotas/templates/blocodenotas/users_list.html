@@ -1,0 +1,19 @@
+{% extends "blocodenotas/base.html" %}
+
+{% block content %}
+
+<h1>Utilizadores</h1>
+<ul>
+	{% for user in object_list %}
+		<li>
+			<a href="#">{{ user }}</a>
+			<a href="#">[editar]</a>
+			<a href="#">[eliminar]</a>
+		</li>
+	{% endfor %}
+</ul>
+
+<p><a href="#">[Criar Utilizador]</a></p>
+<p><a href="{% url "logout" %}">[Logout]</a></p>
+
+{% endblock %}
