@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.contrib.auth.models import User
 from django.views.generic import (
     ListView,
     CreateView,
@@ -13,7 +13,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django import forms
 from .models import Nota
-from django.contrib.auth.models import User, Group
+from .utils import is_member_administrator, LoggedInMixin
 
 
 # Create your views here.
@@ -61,31 +61,11 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('login'))
 
 
-class NotaListView(ListView):
+class NotaListView(LoggedInMixin, ListView):
     model = Nota
     template_name = 'blocodenotas/notas_list.html'
 
-    def dispatch(self, *args, **kwargs):
-        if not self.request.user.is_authenticated():
-            return HttpResponseRedirect(reverse('login'))
-        else:
-            return super(NotaListView, self).dispatch(*args, **kwargs)
 
-
-class UserListView(ListView):
+class UserListView(LoggedInMixin, ListView):
     model = User
     template_name = 'blocodenotas/users_list.html'
-
-    def dispatch(self, *args, **kwargs):
-        if not self.request.user.is_authenticated():
-            return HttpResponseRedirect(reverse('login'))
-        else:
-            return super(UserListView, self).dispatch(*args, **kwargs)
-
-
-def is_member_administrator(user):
-    return user.groups.filter(name='Administrador').exists()
-
-
-def is_member_utilizador(user):
-    return user.groups.filter(name='Utilizador').exists()
