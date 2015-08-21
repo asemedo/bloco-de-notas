@@ -1,0 +1,14 @@
+{% extends "blocodenotas/base.html" %}
+
+{% block content %}
+
+<h1>{{ user }}</h1>
+<p>Nome de utilizador: {{ user.username }}</p>
+<p>Nome completo: {{ user.first_name }} {{ user.last_name }}</p>
+<p>Email: {{ user.email }}</p>
+<p>Grupos: {{ user.groups }}</p>
+
+<p><a href="{% url "home" %}">Home</a></p>
+<p><a href="{% url "logout" %}">Logout</a></p>
+
+{% endblock %}

@@ -12,6 +12,8 @@ urlpatterns = [
     url(r'^nota/(?P<pk>\d+)$', views.NotaView.as_view(),
         name='notas_view'),
     url(r'^userslista/$', views.UserListView.as_view(), name='users_lista'),
+    url(r'^users/(?P<pk>\d+)$', views.UserView.as_view(),
+        name='users_view'),
     url(r'^login$', views.Login.as_view(), name='login'),
     url(r'^logout$', views.logout_view, name='logout'),
 ]

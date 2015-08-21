@@ -123,7 +123,7 @@ class NotaView(LoggedInMixin, DetailView):
     context_object_name = 'nota'
 
 
-# User Model views
+# User Model views ------------------------------------------------------------
 
 class UserListView(LoggedInMixin, ListView):
     model = User
@@ -133,3 +133,53 @@ class UserListView(LoggedInMixin, ListView):
 
     def get_queryset(self):
         return User.objects.filter(groups__name='Utilizador')
+
+
+class CreateUserView(LoggedInMixin, CreateView):
+    model = User
+    fields = "__all__"
+    template_name = 'blocodenotas/edit_user.html'
+    context_object_name = 'user'
+
+    def get_success_url(self):
+        return reverse('users_lista')
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateUserView, self).get_context_data(**kwargs)
+        context['target'] = reverse('user_new')
+        return context
+
+    def form_valid(self, form):
+        form.instance.autor = self.request.user
+        return super(CreateUserView, self).form_valid(form)
+
+
+class UpdateUserView(LoggedInMixin, UpdateView):
+    model = User
+    fields = "__all__"
+    template_name = 'blocodenotas/edit_user.html'
+    context_object_name = 'user'
+
+    def get_success_url(self):
+        return reverse('users_lista')
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateUserView, self).get_context_data(**kwargs)
+        context['target'] = reverse('users_edit',
+                                    kwargs={'pk': self.get_object().id})
+        return context
+
+
+class DeleteUserView(LoggedInMixin, DeleteView):
+    model = User
+    template_name = 'blocodenotas/delete_user.html'
+    context_object_name = 'user'
+
+    def get_success_url(self):
+        return reverse('users_lista')
+
+
+class UserView(LoggedInMixin, DetailView):
+    model = User
+    template_name = 'blocodenotas/user_view.html'
+    context_object_name = 'user'
