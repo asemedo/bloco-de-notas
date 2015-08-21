@@ -75,7 +75,7 @@ class NotaListView(LoggedInMixin, ListView):
 
 class CreateNotaView(LoggedInMixin, CreateView):
     model = Nota
-    fields = '__all__'
+    fields = ['titulo', 'texto', 'created_date']
     template_name = 'blocodenotas/edit_nota.html'
     context_object_name = 'nota'
 
@@ -87,15 +87,19 @@ class CreateNotaView(LoggedInMixin, CreateView):
         context['target'] = reverse('notas_new')
         return context
 
+    def form_valid(self, form):
+        form.instance.autor = self.request.user
+        return super(CreateNotaView, self).form_valid(form)
+
 
 class UpdateNotaView(LoggedInMixin, UpdateView):
     model = Nota
-    fields = '__all__'
+    fields = ['titulo', 'texto', 'created_date']
     template_name = 'blocodenotas/edit_nota.html'
     context_object_name = 'nota'
 
     def get_success_url(self):
-        return reverse('contacts-list')
+        return reverse('notas_lista')
 
     def get_context_data(self, **kwargs):
         context = super(UpdateNotaView, self).get_context_data(**kwargs)
@@ -110,7 +114,7 @@ class DeleteNotaView(LoggedInMixin, DeleteView):
     context_object_name = 'nota'
 
     def get_success_url(self):
-        return reverse('notas_list')
+        return reverse('notas_lista')
 
 
 class NotaView(LoggedInMixin, DetailView):

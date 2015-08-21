@@ -2,13 +2,13 @@
 
 {% block content %}
 
-{% if object.id %}
+{% if nota.id %}
 	<h1>Editar {{object}}</h1>
 {% else %}
 	<h1>Criar Nota</h1>
 {% endif %}
 	
-<form action="{% url "notas_new" %}" method="POST">
+<form action="{{ target }}" method="POST">
 	{% csrf_token %}
 	<ul>
 		{{form.as_ul}}
