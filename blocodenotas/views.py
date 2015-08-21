@@ -156,7 +156,8 @@ class CreateUserView(LoggedInMixin, CreateView):
 
 class UpdateUserView(LoggedInMixin, UpdateView):
     model = User
-    fields = "__all__"
+    # fields = "__all__"
+    fields = ['username', 'first_name', 'last_name', 'email']
     template_name = 'blocodenotas/edit_user.html'
     context_object_name = 'user'
 

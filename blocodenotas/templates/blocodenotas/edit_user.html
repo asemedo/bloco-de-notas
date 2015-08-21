@@ -2,10 +2,10 @@
 
 {% block content %}
 
-{% if nota.id %}
-	<h1>Editar {{nota}}</h1>
+{% if user.id %}
+	<h1>Editar {{user}}</h1>
 {% else %}
-	<h1>Criar Nota</h1>
+	<h1>Adicionar Utilizador</h1>
 {% endif %}
 	
 <form action="{{ target }}" method="POST">

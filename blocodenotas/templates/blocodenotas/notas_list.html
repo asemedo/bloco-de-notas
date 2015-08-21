@@ -4,13 +4,13 @@
 
 <h1>Notas</h1>
 <ul>
-	{% for nota in notas %}
-		<li>
-			<a href="{% url "notas_view" pk=nota.id %}">{{ nota }}</a>
-			<a href="{% url "notas_edit" pk=nota.id %}">[editar]</a>
-			<a href="{% url "notas_delete" pk=nota.id %}">[eliminar]</a>
-		</li>
-	{% endfor %}
+    {% for nota in notas %}
+        <li>
+            <a href="{% url "notas_view" pk=nota.id %}">{{ nota }}</a>
+            <a href="{% url "notas_edit" pk=nota.id %}">[editar]</a>
+            <a href="{% url "notas_delete" pk=nota.id %}">[eliminar]</a>
+        </li>
+    {% endfor %}
 </ul>
 
 <p><a href="{% url "notas_new" %}">[Criar Nota]</a></p>
