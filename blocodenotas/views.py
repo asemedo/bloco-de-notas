@@ -61,11 +61,71 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('login'))
 
 
+# Nota Model views
+
 class NotaListView(LoggedInMixin, ListView):
     model = Nota
     template_name = 'blocodenotas/notas_list.html'
+    paginate_by = 25
+    context_object_name = 'notas'
 
+    def get_queryset(self):
+        return Nota.objects.filter(autor=self.request.user)
+
+
+class CreateNotaView(LoggedInMixin, CreateView):
+    model = Nota
+    fields = '__all__'
+    template_name = 'blocodenotas/edit_nota.html'
+    context_object_name = 'nota'
+
+    def get_success_url(self):
+        return reverse('notas_lista')
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateNotaView, self).get_context_data(**kwargs)
+        context['target'] = reverse('notas_new')
+        return context
+
+
+class UpdateNotaView(LoggedInMixin, UpdateView):
+    model = Nota
+    fields = '__all__'
+    template_name = 'blocodenotas/edit_nota.html'
+    context_object_name = 'nota'
+
+    def get_success_url(self):
+        return reverse('contacts-list')
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateNotaView, self).get_context_data(**kwargs)
+        context['target'] = reverse('notas_edit',
+                                    kwargs={'pk': self.get_object().id})
+        return context
+
+
+class DeleteNotaView(LoggedInMixin, DeleteView):
+    model = Nota
+    template_name = 'blocodenotas/delete_nota.html'
+    context_object_name = 'nota'
+
+    def get_success_url(self):
+        return reverse('notas_list')
+
+
+class NotaView(LoggedInMixin, DetailView):
+    model = Nota
+    template_name = 'blocodenotas/nota_view.html'
+    context_object_name = 'nota'
+
+
+# User Model views
 
 class UserListView(LoggedInMixin, ListView):
     model = User
     template_name = 'blocodenotas/users_list.html'
+    paginate_by = 25
+    context_object_name = 'users'
+
+    def get_queryset(self):
+        return User.objects.filter(groups__name='Utilizador')

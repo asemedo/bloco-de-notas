@@ -1,0 +1,12 @@
+{% extends "blocodenotas/base.html" %}
+
+{% block content %}
+
+<h1>{{ nota }}</h1>
+<p>Título: {{ nota.titulo }}</p>
+<p>Texto: {{ nota.texto }}</p>
+
+<p><a href="{% url "home" %}">Home</a></p>
+<p><a href="{% url "logout" %}">Logout</a></p>
+
+{% endblock %}
