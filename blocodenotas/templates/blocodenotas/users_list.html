@@ -6,7 +6,7 @@
 <ul>
 	{% for user in users %}
 		<li>
-			<a href="{% url "users_view" pk=user.id %}">{{ user }}</a>
+			<a href="{% url "users_view" pk=user.id %}">{{ user.username }} ({{ user.first_name }} {{ user.last_name }})</a>
 			<a href="{% url "users_edit" pk=user.id %}">[editar]</a>
 			<a href="{% url "users_delete" pk=user.id %}">[eliminar]</a>
 		</li>

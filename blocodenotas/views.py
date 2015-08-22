@@ -61,7 +61,7 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('login'))
 
 
-# Nota Model views
+# -- Nota Model views ------------------------------------------------------ ##
 
 class NotaListView(LoggedInMixin, ListView):
     model = Nota
@@ -123,7 +123,7 @@ class NotaView(LoggedInMixin, DetailView):
     context_object_name = 'nota'
 
 
-# User Model views ------------------------------------------------------------
+# -- User Model views ------------------------------------------------------ ##
 
 class UserListView(LoggedInMixin, ListView):
     model = User

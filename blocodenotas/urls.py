@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.home_view,
         name='home'),
-    url(r'^notaslista/$', views.NotaListView.as_view(),
+    url(r'^notaslista$', views.NotaListView.as_view(),
         name='notas_lista'),
     url(r'^newnota$', views.CreateNotaView.as_view(),
         name='notas_new'),
@@ -14,7 +14,7 @@ urlpatterns = [
         name='notas_delete'),
     url(r'^nota/(?P<pk>\d+)$', views.NotaView.as_view(),
         name='notas_view'),
-    url(r'^userslista/$', views.UserListView.as_view(),
+    url(r'^userslista$', views.UserListView.as_view(),
         name='users_lista'),
     url(r'^newuser$', views.CreateUserView.as_view(),
         name='users_new'),
