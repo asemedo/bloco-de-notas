@@ -16,6 +16,8 @@ urlpatterns = [
         name='notas_view'),
     url(r'^userslista/$', views.UserListView.as_view(),
         name='users_lista'),
+    url(r'^newuser$', views.CreateUserView.as_view(),
+        name='users_new'),
     url(r'^edituser/(?P<pk>\d+)$', views.UpdateUserView.as_view(),
         name='users_edit'),
     url(r'^deleteuser/(?P<pk>\d+)$', views.DeleteUserView.as_view(),

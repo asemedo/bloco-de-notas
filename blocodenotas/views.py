@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.views.generic import (
     ListView,
     CreateView,
@@ -137,7 +137,8 @@ class UserListView(LoggedInMixin, ListView):
 
 class CreateUserView(LoggedInMixin, CreateView):
     model = User
-    fields = "__all__"
+    fields = ['username', 'password', 'first_name',
+              'last_name', 'email']
     template_name = 'blocodenotas/edit_user.html'
     context_object_name = 'user'
 
@@ -146,17 +147,22 @@ class CreateUserView(LoggedInMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(CreateUserView, self).get_context_data(**kwargs)
-        context['target'] = reverse('user_new')
+        context['target'] = reverse('users_new')
         return context
 
     def form_valid(self, form):
-        form.instance.autor = self.request.user
+        # This method is called when valid form data has been POSTed
+        # Criar o grupo Utilizador se nao existir
+        if not Group.objects.filter(name='Utilizador').exists():
+            Group(name="Utilizador").save()
+        # Adicionar o utilizador ao grupo Utilizador
+        user = form.save()
+        user.groups.add(Group.objects.get(name='Utilizador'))
         return super(CreateUserView, self).form_valid(form)
 
 
 class UpdateUserView(LoggedInMixin, UpdateView):
     model = User
-    # fields = "__all__"
     fields = ['username', 'first_name', 'last_name', 'email']
     template_name = 'blocodenotas/edit_user.html'
     context_object_name = 'user'
