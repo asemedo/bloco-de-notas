@@ -139,22 +139,19 @@ class CreateUserView(LoggedInMixin, CreateView):
     model = User
     fields = ['username', 'password', 'first_name',
               'last_name', 'email']
-    template_name = 'blocodenotas/edit_user.html'
+    template_name = 'blocodenotas/new_user.html'
     context_object_name = 'user'
 
     def get_success_url(self):
         return reverse('users_lista')
 
-    def get_context_data(self, **kwargs):
-        context = super(CreateUserView, self).get_context_data(**kwargs)
-        context['target'] = reverse('users_new')
-        return context
-
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed
+
         # Criar o grupo Utilizador se nao existir
         if not Group.objects.filter(name='Utilizador').exists():
             Group(name="Utilizador").save()
+
         # Adicionar o utilizador ao grupo Utilizador
         user = form.save()
         user.groups.add(Group.objects.get(name='Utilizador'))
@@ -169,12 +166,6 @@ class UpdateUserView(LoggedInMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('users_lista')
-
-    def get_context_data(self, **kwargs):
-        context = super(UpdateUserView, self).get_context_data(**kwargs)
-        context['target'] = reverse('users_edit',
-                                    kwargs={'pk': self.get_object().id})
-        return context
 
 
 class DeleteUserView(LoggedInMixin, DeleteView):

@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<h1>Editar utilizador {{user}}</h1>
+<h1>Adicionar Utilizador</h1>
 	
-<form action="{% url "users_edit" pk=user.id %}" method="POST">
+<form action="{% url "users_new" %}" method="POST">
 	{% csrf_token %}
 	<ul>
 		{{form.as_ul}}
