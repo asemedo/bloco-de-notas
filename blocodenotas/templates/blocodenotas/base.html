@@ -8,6 +8,11 @@
     </head>
 <body>
     <div class="page-header">
+        {% if user.is_authenticated %}
+        <p class="top-menu">Bem-vindo {{ user.first_name }}<small> <a class="btn btn-warning btn-lg" href="{% url "logout" %}">Log out</a></small></p>
+        {% else %}
+        <a href="{% url "login" %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+        {% endif %}
         <h1><a href="/">Bloco de Notas</a></h1>
     </div>
     <div class="content container">

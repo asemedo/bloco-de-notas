@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from django.views.generic import (
     ListView,
@@ -11,9 +10,9 @@ from django.views.generic.edit import FormView
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
-from django import forms
+from .forms import LoginForm
 from .models import Nota
-from .utils import is_member_administrator, LoggedInMixin
+from .utils import is_member_administrator, is_member_utilizador, LoggedInMixin
 
 
 # Create your views here.
@@ -23,13 +22,10 @@ def home_view(request):
     else:
         if is_member_administrator(request.user):
             return HttpResponseRedirect(reverse('users_lista'))
-        else:
+        elif is_member_utilizador(request.user):
             return HttpResponseRedirect(reverse('notas_lista'))
-
-
-class LoginForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+        else:
+            return HttpResponseRedirect(reverse('login'))
 
 
 class Login(FormView):
