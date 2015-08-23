@@ -6,11 +6,8 @@
 <p>Tem a certeza que deseja eliminar o utilizador {{ user }}?</p>
 <form action="{% url "users_delete" pk=user.id %}" method="POST">
 	{% csrf_token %}
-	<input type="submit" value="Sim, eliminar." />
-	<a href="{% url "users_lista" %}">Não, cancelar.</a>
+	<input class="btn btn-default" type="submit" value="Sim, eliminar." />
+	<a class="btn btn-default" href="{% url "users_lista" %}">Não, cancelar.</a>
 </form>
-
-<p><a href="{% url "home" %}">[Home]</a></p>
-<p><a href="{% url "logout" %}">[Logout]</a></p>
 
 {% endblock %}

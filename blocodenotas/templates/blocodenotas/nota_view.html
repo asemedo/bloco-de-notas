@@ -7,7 +7,9 @@
 <p>Texto: {{ nota.texto }}</p>
 <p>Criada em: {{ nota.created_date }}</p>
 
-<p><a href="{% url "home" %}">Home</a></p>
-<p><a href="{% url "logout" %}">Logout</a></p>
+<p>
+	<a class="btn btn-primary btn-default" href="{% url "notas_edit" pk=nota.id %}">editar</a> 
+	<a class="btn btn-primary btn-default" href="{% url "notas_delete" pk=nota.id %}">eliminar</a>
+</p>
 
 {% endblock %}

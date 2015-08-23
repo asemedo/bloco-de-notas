@@ -6,13 +6,10 @@
 	
 <form action="{% url "users_edit" pk=user.id %}" method="POST">
 	{% csrf_token %}
-	<ul>
+	<ul class="list-unstyled block">
 		{{form.as_ul}}
 	</ul>
-	<input type="submit" value="Save"/>
+	<input class="btn btn-primary btn-default" type="submit" value="Guardar"/>
 </form>
-
-<p><a href="{% url "home" %}">[Home]</a></p>
-<p><a href="{% url "logout" %}">[Logout]</a></p>
 
 {% endblock %}

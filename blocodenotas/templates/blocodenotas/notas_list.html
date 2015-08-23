@@ -3,7 +3,7 @@
 {% block content %}
 
 <h1>Notas</h1>
-<ul>
+<ul class="list-unstyled">
     {% for nota in notas %}
         <li>
             <a href="{% url "notas_view" pk=nota.id %}">{{ nota }}</a>
@@ -13,7 +13,6 @@
     {% endfor %}
 </ul>
 
-<p><a href="{% url "notas_new" %}">[Criar Nota]</a></p>
-<p><a href="{% url "logout" %}">[Logout]</a></p>
+<p><a class="btn btn-primary btn-default" href="{% url "notas_new" %}">Criar Nota</a></p>
 
 {% endblock %}

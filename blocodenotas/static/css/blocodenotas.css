@@ -1,3 +1,32 @@
+/* blocodenotas.css
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  min-height: 60px;
+  background-color: #f5f5f5;
+}
+
+.footer .container {
+    padding: 0 40px;
+    width: 100%;
+}
+
+.container .text-muted {
+    margin: 20px 0;
+}
+
 .page-header {
     background-color: #3095C5;
     margin-top: 0;
@@ -6,11 +35,32 @@
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
     color: #ffffff;
-    font-size: 46pt;
+    font-size: 56px;
     text-decoration: none;
     font-weight: bold;
+    margin: 5px 5px 5px 0;
 }
 
+.page-header h1 small, .h1 small {
+    font-size: 70%;
+    color: #ffffff;
+    padding-left: 5px;
+}
+
+.top-menu, .top-menu a .top-menu a:hover, .top-menu a:visited {
+    color: #ffffff;
+    float: right;
+    font-size: 22px;
+    margin-right: 20px;
+}
+
+p.top-menu {
+    margin-top: 25px;
+}
+
+.space-right {
+    padding-right: 15px;
+}
 .content {
     margin-left: 40px;
 }
@@ -42,25 +92,48 @@ h2, .h2 {
     float: right;
 }
 
-.post-form textarea, .post-form input {
+.block textarea, .block input {
     width: 100%;
 }
 
-.top-menu, .top-menu:hover, .top-menu:visited {
-    color: #ffffff;
-    float: right;
-    font-size: 26pt;
-    margin-right: 20px;
+
+.block label {
+    display: block;
+    max-width: 100%;
+    margin: 5px 0;
+    font-weight: 700;
 }
 
-.post {
-    margin-bottom: 70px;
+.login .block input {
+    width: 230px; 
+    margin-bottom: 10px;
 }
 
-.post h1 a, .post h1 a:visited {
-    color: #000000;
+.login {
+    margin-right: 40px;
+    margin-top: 20px;
 }
 
-.comment {
-    margin: 20px 0px 20px 20px;
+.login ul.errorlist {
+    color: #a94442;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+@media screen and (min-width: 768px) {
+.login .jumbotron {
+    padding-top: 20px; 
+    padding-bottom: 30px; 
+}
+}
+
+@media screen and (min-width: 768px) {
+.login .jumbotron h1, .login .jumbotron .h1 {
+    font-size: 48px;
+}
+}
+
+.login .jumbotron p {
+    margin-top: -10px;
+    font-size: 18px;
 }

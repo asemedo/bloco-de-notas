@@ -12,7 +12,9 @@
 {% endfor %}
 </p>
 
-<p><a href="{% url "home" %}">[Home]</a></p>
-<p><a href="{% url "logout" %}">[Logout]</a></p>
+<p>
+    <a class="btn btn-primary btn-default" href="{% url "users_edit" pk=user.id %}">editar</a> 
+    <a class="btn btn-primary btn-default" href="{% url "users_delete" pk=user.id %}">eliminar</a>
+<p>
 
 {% endblock %}
