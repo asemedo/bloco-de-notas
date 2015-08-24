@@ -4,15 +4,17 @@
 
 <h1>Lista de Utilizadores</h1>
 <ul class="list-unstyled">
-	{% for user in users %}
-		<li>
-			<a href="{% url "users_view" pk=user.id %}">{{ user.username }} ({{ user.first_name }} {{ user.last_name }})</a>
-			<a href="{% url "users_edit" pk=user.id %}">[editar]</a>
-			<a href="{% url "users_delete" pk=user.id %}">[eliminar]</a>
-		</li>
-	{% endfor %}
+    {% for user in users %}
+        <li>
+            <a href="{% url "users_view" pk=user.id %}">{{ user.username }} ({{ user.first_name }} {{ user.last_name }})</a>
+            <a href="{% url "users_edit" pk=user.id %}">[editar]</a>
+            <a href="{% url "users_delete" pk=user.id %}">[eliminar]</a>
+        </li>
+    {% endfor %}
 </ul>
 
-<p><a class="btn btn-primary btn-default" href="{% url "users_new" %}">Criar Utilizador</a></p>
+<p>
+    <a class="btn btn-primary btn-default" href="{% url "users_new" %}">Criar Utilizador</a> 
+</p>
 
 {% endblock %}

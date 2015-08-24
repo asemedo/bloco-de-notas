@@ -137,3 +137,11 @@ h2, .h2 {
     margin-top: -10px;
     font-size: 18px;
 }
+
+.nota {
+    width: 50%;
+}
+
+hr.white {
+    border: 1px solid #fff;
+}

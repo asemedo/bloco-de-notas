@@ -3,7 +3,7 @@
 {% block content %}
 
 <h1>Eliminar Nota</h1>
-<p>Tem a certeza que deseja eliminar a nota {{ nota }}?</p>
+<p>Tem a certeza que deseja eliminar a nota <strong>"{{ nota }}"</strong>?</p>
 <form action="{% url "notas_delete" pk=nota.id %}" method="POST">
 	{% csrf_token %}
 	<input class="btn btn-default" type="submit" value="Sim, eliminar." />

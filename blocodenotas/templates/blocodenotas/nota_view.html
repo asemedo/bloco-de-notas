@@ -1,15 +1,19 @@
 {% extends "blocodenotas/base.html" %}
 
 {% block content %}
+<div class="nota">
+	<h1>{{ nota }}</h1>
+	<hr>
+	<p>{{ nota.texto|linebreaks }}</p>
 
-<h1>{{ nota }}</h1>
-<p>Título: {{ nota.titulo }}</p>
-<p>Texto: {{ nota.texto }}</p>
-<p>Criada em: {{ nota.created_date }}</p>
+	<hr class="white">
+	<p><small>Data: {{ nota.created_date }}</small></p>
+	<hr>
 
-<p>
-	<a class="btn btn-primary btn-default" href="{% url "notas_edit" pk=nota.id %}">editar</a> 
-	<a class="btn btn-primary btn-default" href="{% url "notas_delete" pk=nota.id %}">eliminar</a>
-</p>
+	<p>
+		<a class="btn btn-primary btn-default" href="{% url "notas_edit" pk=nota.id %}">editar</a> 
+		<a class="btn btn-primary btn-default" href="{% url "notas_delete" pk=nota.id %}">eliminar</a>
+	</p>
+</div>
 
 {% endblock %}

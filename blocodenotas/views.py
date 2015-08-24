@@ -12,7 +12,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from .forms import LoginForm
 from .models import Nota
-from .utils import is_member_administrator, is_member_utilizador, LoggedInMixin
+from .utils import is_member_administrator, is_member_utilizador, \
+                LoggedInMixin, AdminGroupMixin, UserGroupMixin, OwnerMixin
 
 
 # Create your views here.
@@ -57,9 +58,9 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('login'))
 
 
-# -- Nota Model views ------------------------------------------------------ ##
+# -- Notas views ------------------------------------------------------ ##
 
-class NotaListView(LoggedInMixin, ListView):
+class NotaListView(LoggedInMixin, UserGroupMixin, ListView):
     model = Nota
     template_name = 'blocodenotas/notas_list.html'
     paginate_by = 25
@@ -69,7 +70,7 @@ class NotaListView(LoggedInMixin, ListView):
         return Nota.objects.filter(autor=self.request.user)
 
 
-class CreateNotaView(LoggedInMixin, CreateView):
+class CreateNotaView(LoggedInMixin, UserGroupMixin, CreateView):
     model = Nota
     fields = ['titulo', 'texto', 'created_date']
     template_name = 'blocodenotas/edit_nota.html'
@@ -88,7 +89,7 @@ class CreateNotaView(LoggedInMixin, CreateView):
         return super(CreateNotaView, self).form_valid(form)
 
 
-class UpdateNotaView(LoggedInMixin, UpdateView):
+class UpdateNotaView(LoggedInMixin, OwnerMixin, UpdateView):
     model = Nota
     fields = ['titulo', 'texto', 'created_date']
     template_name = 'blocodenotas/edit_nota.html'
@@ -104,7 +105,7 @@ class UpdateNotaView(LoggedInMixin, UpdateView):
         return context
 
 
-class DeleteNotaView(LoggedInMixin, DeleteView):
+class DeleteNotaView(LoggedInMixin, OwnerMixin, DeleteView):
     model = Nota
     template_name = 'blocodenotas/delete_nota.html'
     context_object_name = 'nota'
@@ -113,15 +114,15 @@ class DeleteNotaView(LoggedInMixin, DeleteView):
         return reverse('notas_lista')
 
 
-class NotaView(LoggedInMixin, DetailView):
+class NotaView(LoggedInMixin, OwnerMixin, DetailView):
     model = Nota
     template_name = 'blocodenotas/nota_view.html'
     context_object_name = 'nota'
 
 
-# -- User Model views ------------------------------------------------------ ##
+# -- Users views ------------------------------------------------------ ##
 
-class UserListView(LoggedInMixin, ListView):
+class UserListView(LoggedInMixin, AdminGroupMixin, ListView):
     model = User
     template_name = 'blocodenotas/users_list.html'
     paginate_by = 25
@@ -131,7 +132,7 @@ class UserListView(LoggedInMixin, ListView):
         return User.objects.filter(groups__name='Utilizador')
 
 
-class CreateUserView(LoggedInMixin, CreateView):
+class CreateUserView(LoggedInMixin, AdminGroupMixin, CreateView):
     model = User
     fields = ['username', 'password', 'first_name',
               'last_name', 'email']
@@ -154,7 +155,7 @@ class CreateUserView(LoggedInMixin, CreateView):
         return super(CreateUserView, self).form_valid(form)
 
 
-class UpdateUserView(LoggedInMixin, UpdateView):
+class UpdateUserView(LoggedInMixin, AdminGroupMixin, UpdateView):
     model = User
     fields = ['username', 'first_name', 'last_name', 'email']
     template_name = 'blocodenotas/edit_user.html'
@@ -164,7 +165,7 @@ class UpdateUserView(LoggedInMixin, UpdateView):
         return reverse('users_lista')
 
 
-class DeleteUserView(LoggedInMixin, DeleteView):
+class DeleteUserView(LoggedInMixin, AdminGroupMixin, DeleteView):
     model = User
     template_name = 'blocodenotas/delete_user.html'
     context_object_name = 'user'
@@ -173,7 +174,7 @@ class DeleteUserView(LoggedInMixin, DeleteView):
         return reverse('users_lista')
 
 
-class UserView(LoggedInMixin, DetailView):
+class UserView(LoggedInMixin, AdminGroupMixin, DetailView):
     model = User
     template_name = 'blocodenotas/user_view.html'
     context_object_name = 'user'
