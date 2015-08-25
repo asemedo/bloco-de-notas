@@ -65,7 +65,8 @@ class PasswordChangeView(LoggedInMixin, FormView):
     form_class = PasswordChangeForm
 
     def form_valid(self, form):
-        form = PasswordChangeForm(user=self.request.user, data=self.request.POST)
+        form = PasswordChangeForm(user=self.request.user,
+                                  data=self.request.POST)
         if form.is_valid():
             form.save()
             update_session_auth_hash(self.request, form.user)

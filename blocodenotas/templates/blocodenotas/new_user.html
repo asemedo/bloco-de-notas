@@ -2,15 +2,29 @@
 
 {% block content %}
 
-<h1>Adicionar Utilizador</h1>
-	
-<form action="{% url "users_new" %}" method="POST">
-	{% csrf_token %}
-	<ul class="list-unstyled block">
-		{{form.as_ul}}
-	</ul>
-	<input class="btn btn-primary btn-default" type="submit" value="Guardar"/>
-</form>
+<div class="notes-edit box-notes-detail">
+	<h1>Adicionar Utilizador</h1>
+		
+	<form action="{% url "users_new" %}" method="POST">
+		{% csrf_token %}
+		<ul class="list-unstyled block">
+			{{form.as_ul}}
+		</ul>
+		<hr>
+		<p>
+		<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Guardar</button>
+		<a class="btn btn-default" href="{% url "home" %}"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Cancelar</a>
+		</p>
+	</form>
+</div>
 
+<p class="notes-nav-footer">
+	<a class="btn btn-primary" href="{% url "users_new" %}">
+		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Novo utilizador
+	</a>
+	<a class="btn btn-primary" href="{% url "home" %}">
+		<span class="glyphicon glyphicon-list" aria-hidden="true"></span> Lista de Utilizadores
+	</a>
+</p>
 
 {% endblock %}

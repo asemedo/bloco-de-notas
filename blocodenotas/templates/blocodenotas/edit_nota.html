@@ -2,18 +2,35 @@
 
 {% block content %}
 
-{% if nota.id %}
-	<h1>Editar {{nota}}</h1>
-{% else %}
-	<h1>Criar Nota</h1>
-{% endif %}
-	
-<form action="{{ target }}" method="POST">
-	{% csrf_token %}
-	<ul class="list-unstyled block">
-		{{form.as_ul}}
-	</ul>
-	<input class="btn btn-primary btn-default" type="submit" value="Guardar"/>
-</form>
+<div class="notes-edit box-notes-detail">
+	{% if nota.id %}
+		<h1>Editar {{nota}}</h1>
+	{% else %}
+		<h1>Criar Nota</h1>
+	{% endif %}
+		
+	<form action="{{ target }}" method="POST">
+		{% csrf_token %}
+		<ul class="list-unstyled block">
+			{{form.as_ul}}
+		</ul>
+		<hr>
+		<p>
+		<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Guardar</button>
+		<a class="btn btn-default" href="{% url "home" %}"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Cancelar</a>
+		</p>
+	</a>
+	</form>
+</div>
+
+<p class="notes-nav-footer">
+	<a class="btn btn-primary" href="{% url "notas_new" %}">
+		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nova Nota
+	</a>
+	<a class="btn btn-primary" href="{% url "home" %}">
+		<span class="glyphicon glyphicon-list" aria-hidden="true"></span> Lista de Notas
+	</a>
+</p>
+
 
 {% endblock %}

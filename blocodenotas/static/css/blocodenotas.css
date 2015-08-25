@@ -73,6 +73,7 @@ body {
 h1, h2, h3, h4 {
     font-family: 'Titillium Web', sans-serif;
     font-weight: bold;
+    color: #6B6A6A;
 }
 
 h1, .h1 {
@@ -94,7 +95,13 @@ h2, .h2 {
 
 .block textarea, .block input {
     width: 100%;
+    padding: 3px 10px;
 }
+
+.block textarea {
+    height: 150px;
+}
+
 
 
 .block label {
@@ -144,4 +151,96 @@ h2, .h2 {
 
 hr.white {
     border: 1px solid #fff;
+}
+
+hr.gray {
+    border: 1px solid #E8E7E7;
+}
+
+.box-notes {
+    margin: 0 -10px 20px;
+    overflow: hidden;
+}
+
+.box-notes-list {
+    padding-left: 0;
+    list-style: none;
+}
+
+.box-notes li {
+    float: left;
+    min-width: 200px;
+    min-height: 80px;
+    padding: 20px;
+    font-size: 16px;
+    line-height: 1.4;
+    text-align: center;
+    background-color: #F1F1F1;
+    border: 10px solid #fff;
+    color: #727272;
+}
+
+.box-notes li:hover {
+    /* color: #000; */
+    background-color: #E2EDF3;
+}
+
+
+.box-notes li a {
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #7d7d7d;
+	padding-right: 15px;
+}
+
+.box-notes li a:hover  {
+	color: #5696B5;
+	font-weight: 500;
+	/* text-decoration: none; */
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default {
+    color: #fff !important;
+	background-color: #679ECE;
+    border-color: #5A8EBB;
+}
+
+.box-notes-detail {
+    margin: 0 -20px 30px;
+    overflow: hidden;
+    float: left;
+    min-width: 200px;
+    min-height: 200px;
+    width: 100%;
+    padding: 10px 40px 25px 40px;
+    font-size: 22px;
+    line-height: 1.4;
+    background-color: #F1F1F1;
+    border: 10px solid #fff;
+    color: #727272;
+}
+
+.box-notes-detail small, .box-notes-detail .small {
+    font-size: 65%;
+}
+
+.box-notes-detail:hover  {
+	/* background-color: #E2EDF3; */
+}
+
+.notes-edit textarea, .notes-edit input {
+	font-size: 18px;
+}
+
+.notes-nav-footer {
+	padding-bottom: 40px;
+}
+
+.notes-nav-footer a {
+	margin-right: 10px;
+}
+
+.notes-col3 {
+    width: 33.3%;
+    text-align: left !important;
 }
