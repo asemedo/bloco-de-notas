@@ -8,12 +8,14 @@ from django.views.generic import (
 )
 from django.views.generic.edit import FormView
 from django.core.urlresolvers import reverse
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, \
+    update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponseRedirect
 from .forms import LoginForm
 from .models import Nota
 from .utils import is_member_administrator, is_member_utilizador, \
-                LoggedInMixin, AdminGroupMixin, UserGroupMixin, OwnerMixin
+    LoggedInMixin, AdminGroupMixin, UserGroupMixin, OwnerMixin
 
 
 # Create your views here.
@@ -56,6 +58,26 @@ class Login(FormView):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('login'))
+
+
+class PasswordChangeView(LoggedInMixin, FormView):
+    template_name = 'registration/pwd_change_form.html'
+    form_class = PasswordChangeForm
+
+    def form_valid(self, form):
+        form = PasswordChangeForm(user=self.request.user, data=self.request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(self.request, form.user)
+        return HttpResponseRedirect(reverse('password_change_done'))
+
+    def get_form_kwargs(self):
+        kwargs = super(PasswordChangeView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def get_success_url(self):
+        return reverse('password_change_done')
 
 
 # -- Notas views ------------------------------------------------------ ##

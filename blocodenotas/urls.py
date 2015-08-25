@@ -1,4 +1,5 @@
 from django.conf.urls import include, url
+from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
@@ -28,4 +29,9 @@ urlpatterns = [
         name='login'),
     url(r'^logout$', views.logout_view,
         name='logout'),
+    url(r'^change-password/$', views.PasswordChangeView.as_view(),
+        name='password_change'),
+    url(r'^change-password/done/$', auth_views.password_change_done,
+        {'template_name': 'registration/pwd_change_done.html'},
+        name='password_change_done'),
 ]

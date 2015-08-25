@@ -7,14 +7,6 @@
   <p class="alert alert-danger" role="alert">Dados de autenticação inválidos! Por favor tente de novo.</p>
   {% endif %}
 
-  {% if next %}
-      {% if user.is_authenticated %}
-      <p class="alert alert-danger" role="alert">A sua conta não permite acesso a esta página. Para prosseguir, faça login com uma conta que tenha acesso.</p>
-      {% else %}
-      <p class="alert alert-warning" role="alert">P.f. autentique-se para aceder a esta página.</p>
-      {% endif %}
-  {% endif %}
-
   <div class="jumbotron">
     <h1>Autenticação</h1>
     <p>Faça login para aceder à sua área pessoal</p>
@@ -26,7 +18,6 @@
       </ul>
 
       <input type="submit" value="LOGIN" class="btn btn-primary">
-      <input type="hidden" name="next" value="{{ next }}" />
 
     </form>
 

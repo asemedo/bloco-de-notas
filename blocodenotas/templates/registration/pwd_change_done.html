@@ -1,0 +1,15 @@
+{% extends "blocodenotas/base.html" %}
+
+{% block content %}
+
+<div class="login">
+
+  <div class="jumbotron">
+    <h1>Parabéns</h1>
+    <p>Password alterada com sucesso!</p>
+    <p><a class="btn btn-primary btn-default" href="{% url "logout" %}">Login com a nova password</a></p>
+
+  </div>
+</div>
+
+{% endblock %}

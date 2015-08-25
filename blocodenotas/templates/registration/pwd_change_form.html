@@ -1,0 +1,27 @@
+{% extends "blocodenotas/base.html" %}
+
+{% block content %}
+
+<div class="login">
+  {% if form.errors %}
+  <p class="alert alert-danger" role="alert">Dados inválidos! Por favor tente de novo.</p>
+  {% endif %}
+
+  <div class="jumbotron">
+    <h1>Alterar Password</h1>
+    <p>Para alterar a sua password, preencha os seguintes campos obrigatórios</p>
+    <form method="post" action="{% url 'password_change' %}">
+      {% csrf_token %}
+
+      <ul class="list-unstyled block">
+        {{form.as_ul}}
+      </ul>
+
+      <input type="submit" value="SUBMETER" class="btn btn-primary">
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
