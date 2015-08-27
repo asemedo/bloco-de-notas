@@ -3,9 +3,18 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.http import Http404
+from django.contrib.auth.models import User, Group
 
 
 def is_member_administrator(user):
+    # Criar o grupo Utilizador se nao existir
+    if not Group.objects.filter(name='Administrador').exists():
+        Group(name="Administrador").save()
+
+    # Adicionar o utilizador ao grupo Utilizador
+    if user.is_superuser:
+        user.groups.add(Group.objects.get(name='Administrador'))
+
     return user.groups.filter(name='Administrador').exists()
 
 
