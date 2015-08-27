@@ -172,9 +172,13 @@ class CreateUserView(LoggedInMixin, AdminGroupMixin, CreateView):
         if not Group.objects.filter(name='Utilizador').exists():
             Group(name="Utilizador").save()
 
-        # Adicionar o utilizador ao grupo Utilizador
         user = form.save()
+        user.set_password(user.password)
+        user.save()
+
+        # Adicionar o utilizador ao grupo Utilizador
         user.groups.add(Group.objects.get(name='Utilizador'))
+
         return super(CreateUserView, self).form_valid(form)
 
 

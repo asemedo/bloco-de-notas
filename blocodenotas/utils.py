@@ -3,7 +3,7 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.http import Http404
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 
 
 def is_member_administrator(user):
@@ -11,7 +11,7 @@ def is_member_administrator(user):
     if not Group.objects.filter(name='Administrador').exists():
         Group(name="Administrador").save()
 
-    # Adicionar o utilizador ao grupo Utilizador
+    # Adicionar o superuser ao grupo Administrador
     if user.is_superuser:
         user.groups.add(Group.objects.get(name='Administrador'))
 
